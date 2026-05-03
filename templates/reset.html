@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Reset Password</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+    <div class="bg-white p-10 rounded-lg shadow-lg w-full max-w-md">
+
+        <h1 class="text-2xl font-bold text-center mb-6">
+            Create New Password
+        </h1>
+
+        <!-- Notification -->
+        {% if message %}
+        <div class="mb-4 p-3 rounded text-center
+            {% if 'error' in message %} bg-red-100 text-red-600
+            {% else %} bg-green-100 text-green-600 {% endif %}">
+            {{ message }}
+        </div>
+        {% endif %}
+
+        <!-- ✅ REDIRECT (PUT HERE) -->
+        {% if redirect %}
+        <p class="text-sm text-gray-500 mt-2 text-center">
+            Redirecting to login...
+        </p>
+        
+        <script>
+            setTimeout(() => {
+                window.location.href = "/login";
+            }, 3000);
+        </script>
+        {% endif %}
+
+        <form method="POST">
+
+            <!-- New Password -->
+            <div class="mb-4">
+                <label class="block mb-1">New Password</label>
+                <div class="relative">
+                    <input type="password" name="password" id="new_password"
+                        class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        placeholder="Enter new password">
+
+                    <span onclick="toggleInput('new_password')" class="absolute right-3 top-2 cursor-pointer">👁</span>
+                </div>
+            </div>
+
+            <!-- Confirm -->
+            <div class="mb-6">
+                <label class="block mb-1">Confirm Password</label>
+                <div class="relative">
+                    <input type="password" name="confirm" id="confirm_password"
+                        class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        placeholder="Confirm password">
+
+                    <span onclick="toggleInput('confirm_password')"
+                        class="absolute right-3 top-2 cursor-pointer">👁</span>
+                </div>
+            </div>
+
+            <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
+                Submit
+            </button>
+
+        </form>
+
+    </div>
+
+    <script>
+        function toggleInput(id) {
+            const input = document.getElementById(id);
+            input.type = input.type === "password" ? "text" : "password";
+        }
+    </script>
+
+</body>
+
+</html>

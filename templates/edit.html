@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+</head>
+<body>
+    <h1>Edit Expense</h1>
+    <form action="/update/{{ expense [0]}}" method="POST">
+
+        <input type="text" name="expense" value="{{ expense [1]}}">
+        <br>
+        <br>
+
+        <!-- <input type="text" name="category" value="{{ expense [2]}}"> -->
+        <select name="category">
+            <option value="" >--Select Category--</option>
+            <option value="Saving" {% if expense[2]=="Saving" %}selected{% endif %}>Saving</option>
+            <option value="Food" {% if expense[2]=="Food" %}selected{% endif %}>Food</option>
+            <option value="Transport" {% if expense[2] =="Transport" %}selected{% endif %}>Transport</option>
+            <option value="Shopping" {% if expense[2]=="Shopping" %}selected{% endif %}>Shopping</option>
+            <option value="Other" {% if expense[2]=="Other" %}selected{% endif %}>Other</option>
+
+
+
+
+        </select>
+        <br>
+        <br>
+        
+        <input type="number" name="amount" value="{{ expense [3]}}">
+        <br>
+        <br>
+
+        <button  type="submit">Update</button>
+
+
+
+    </form>
+</body>
+</html>

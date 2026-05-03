@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Forgot Password</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+{% if message %}
+<div id="alert" class="fixed top-5 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded shadow-lg text-white
+     {% if 'error' in message %} bg-red-500 {% else %} bg-green-500 {% endif %}">
+
+    {{ message.split(':')[1] }}
+</div>
+{% endif %}
+
+    <div class="bg-white p-10 rounded-lg shadow-lg w-full max-w-md text-center">
+
+        <h1 class="text-2xl font-bold mb-2">
+            Forgotten your password?
+        </h1>
+
+        <p class="text-gray-500 mb-6">
+            There is nothing worry about, we'll sent you a message to help you reset your password.
+        </p>
+
+        {% if message %}
+        <div class="mb-4 p-3 rounded text-center 
+            {% if '❌' in message %} bg-red-100 text-red-600 
+            {% else %} bg-green-100 text-green-600 {% endif %}">
+            {{ message }}
+        </div>
+        {% endif %}
+
+        <!-- ✅ RESET LINK (PUT HERE) -->
+        {% if link %}
+        <p class="mb-4 text-center">
+            <a href="{{ link }}" class="text-blue-500 underline">
+                Click here to reset password
+            </a>
+        </p>
+        {% endif %}
+
+        <form method="POST" action="/forgot">
+
+            <div class="mb-6 text-left">
+                <label class="block mb-1">Email Address</label>
+                <input type="email" name="email"
+                    class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    placeholder="Enter personal or work email address">
+            </div>
+
+            <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
+                Send Reset Link
+            </button>
+
+        </form>
+
+        <p class="mt-4 text-sm">
+            <a href="/login" class="text-blue-500">Back to Login</a>
+        </p>
+
+    </div>
+
+</body>
+<script>
+    setTimeout(() => {
+        const alert = document.getElementById("alert");
+        if (alert) {
+            alert.style.display = "none";
+        }
+    }, 3000);
+</script>
+</html>

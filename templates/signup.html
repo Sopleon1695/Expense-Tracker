@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+    <div class="bg-white p-10 rounded-lg shadow-lg w-full max-w-md">
+
+        <h1 class="text-3xl font-bold text-center mb-2">Sign Up</h1>
+        <p class="text-gray-500 text-center mb-6">
+            Create an account to take control of your spending today.
+        </p>
+        {% if message %}
+        <div class="mb-4 p-3 rounded text-center
+            {% if 'error' in message %} bg-red-100 text-red-600
+            {% else %} bg-green-100 text-green-600 {% endif %}">
+        {{ message }}
+        </div>
+        {% endif %}
+        {% if redirect %}
+        <p class="text-sm text-gray-500 mt-2 text-center">
+            Redirecting to login...
+        </p>
+        
+        <script>
+            setTimeout(() => {
+                window.location.href = "/login";
+            }, 3000);
+        </script>
+        {% endif %}
+
+        {% if not redirect %}
+        <form method="POST" action="/signup">
+
+            <!-- Name -->
+            <div class="mb-4">
+                <label class="block mb-1">Name</label>
+                <input type="text" name="name"
+                       class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+                       placeholder="Enter your name">
+            </div>
+
+            <!-- Email -->
+            <div class="mb-4">
+                <label class="block mb-1">Email</label>
+                <input type="email" name="email"
+                       class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+                       placeholder="Enter your email">
+            </div>
+
+            <!-- Password -->
+            <div class="mb-4">
+                <label class="block mb-1">Password</label>
+                <div class="relative">
+                    <input type="password" name="password" id="password"
+                        class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        placeholder="Enter password">
+                
+                    <span onclick="toggleInput('password')" class="absolute right-3 top-2 cursor-pointer text-gray-500">
+                        👁
+                    </span>
+                </div>
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="mb-6">
+                <label class="block mb-1">Confirm Password</label>
+                <div class="relative">
+                    <input type="password" name="confirm_password" id="confirm_password"
+                        class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        placeholder="Confirm password">
+                
+                    <span onclick="toggleInput('confirm_password')" class="absolute right-3 top-2 cursor-pointer text-gray-500">
+                        👁
+                    </span>
+            </div>
+
+            <!-- Button -->
+            <button type="submit"
+                    class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 mt-5" >
+                Sign Up
+            </button>
+
+        </form>
+        {% endif %}
+
+        <p class="text-center text-sm mt-4">
+            Already have an account?
+            <a href="/login" class="text-blue-500">Login</a>
+        </p>
+
+    </div>
+<script>
+    function toggleInput(id) {
+        const input = document.getElementById(id);
+        input.type = input.type === "password" ? "text" : "password";
+    }
+</script>
+</body>
+</html>

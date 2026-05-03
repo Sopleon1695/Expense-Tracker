@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="body">
+    <h1>Expense Tracker</h1>
+    <p>Welcome to my first Flask Project</p>
+    <h1>Hello {{username}}</h1>
+
+    <form action="/add" method="POST">
+        <label>Expense Name</label>
+        <input type="text" name="expense">
+
+        <br>
+        <br>
+
+        <label>Category</label>
+        <!-- <input type="text" name="=category"> -->
+        <select name="category">
+            <option>  </option>
+            <option>Saving</option>
+            <option>Education</option>
+            <option>Food</option>
+            <option>Transport</option>
+            <option>Shopping</option>
+            <option>Other</option>
+        </select>
+        <br>
+        <br>
+
+        <label>Amount</label>
+        <input type="number" name="amount">
+
+        <br>
+        <br>
+
+        <button type="submit">Add Expense</button>
+    </form>
+    <h2>Expense List</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Expense</th>
+            <th>Category</th>
+            <th>Amount</th>
+            <th>Action</th>
+        </tr>
+        {% for expense in expenses %}
+
+        <tr>
+            <td>{{ expense[0] }}</td> <!--id-->
+            <td>{{ expense[1] }}</td> <!--name-->
+            <td>{{ expense[2] }}</td> <!--category-->
+            <td>{{ expense[3] }}</td> <!--amount-->
+
+            <td>
+                <a href="/edit/{{ expense[0]}}">[Edit]</a> |
+                <a href="/delete/{{ expense[0] }}">[Delete]</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <h2>Total Expense: {{ total }}</h2>
+    <h2>Category Totals</h2>
+    <ul>
+    {% for category , amount in category_totals%}
+        <li>{{ category }}: MMK  {{ "{:,}".format(amount)}}</li>
+    {% endfor %}
+    </ul>
+    <div class="chart">
+    
+        <div class="chart-item">
+            <canvas id="pieChart"></canvas>
+        </div>
+    
+        <div class="chart-item">
+            <canvas id="barChart"></canvas>
+        </div>
+    
+        <div class="chart-item">
+            <canvas id="lineChart"></canvas>
+        </div>
+    
+    </div>
+    <script>
+        const labels = {{ labels | tojson }};
+        const values = {{ values | tojson }};
+    </script>
+    <script>
+        const lineCtx = document.getElementById('lineChart').getContext('2d');
+
+        new Chart(lineCtx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Expenses Trend (MMK)',
+                    data: values,
+                    borderColor: '#ff6384',
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    fill: true,
+                    tension: 0.3   // makes smooth curve
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+    <script>
+        const pieCtx = document.getElementById('pieChart').getContext('2d');
+
+        new Chart(pieCtx, {
+            type: 'doughnut',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: values,
+                    backgroundColor: [
+                        '#ff6384',
+                        '#36a2eb',
+                        '#ffce56',
+                        '#4bc0c0',
+                        '#9966ff'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+    <script>
+        const barCtx = document.getElementById('barChart').getContext('2d');
+
+        new Chart(barCtx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Expenses (MMK)',
+                    data: values,
+                    backgroundColor: '#36a2eb'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+    <!-- <canvas id="expenseChart" width="300" height="300"></canvas>
+    <script>
+        const labels = {{ labels | tojson }};
+        const values = {{ values | tojson }};
+    </script>
+    <script>
+        const ctx = document.getElementById('expenseChart').getContext('2d');
+
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Expenses',
+                    data: values,
+                    backgroundColor: [
+                        '#ff6384',
+                        '#36a2eb',
+                        '#ffce56',
+                        '#4bc0c0',
+                        '#9966ff'
+                    ]
+                }]
+            },
+            options: {
+                responsive: false
+            }
+        });
+    </script> -->
+    
+</body>
+
+</html>

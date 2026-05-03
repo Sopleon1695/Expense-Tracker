@@ -1,0 +1,11 @@
+Very Important Concept
+
+Flask workflow:
+
+User opens browser
+        ↓
+Flask receives request
+        ↓
+Flask loads HTML from templates
+        ↓
+Browser shows page
