@@ -110,7 +110,7 @@ def reset_password(token):
 
         hashed = generate_password_hash(new_password)
 
-        # ⚠️ TEMP (simple version)
+        #  TEMP (simple version)
         conn = sqlite3.connect("expenses.db")
         cursor = conn.cursor()
 
@@ -264,7 +264,7 @@ def init_db():
     conn =  sqlite3.connect("expenses.db")
     cursor =  conn.cursor()
 
-    # 📊 Expenses table
+    #  Expenses table
     cursor.execute("""
                    CREATE TABLE IF NOT EXISTS expenses (
                    id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -272,7 +272,7 @@ def init_db():
                    category TEXT, 
                    amount INTEGER)""")
     
-    # 👤 Users table (ADD THIS)
+    #  Users table (ADD THIS)
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
