@@ -175,7 +175,8 @@ def signup():
 
     return render_template("signup.html", message=message, redirect=redirect_to_login)
 
-@app.route("/dashboard")
+
+@app.route("/home")
 def home():
     
     conn=sqlite3.connect("expenses.db")

@@ -6,29 +6,99 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
 </head>
 <body>
-    
-        ```
+    <div class="sidebar">
         <!-- TOP BLACK MENU BAR -->
         <div class="sidebar-header">
-            <span class="menu-icon">☰</span>
+            <!-- <span>☰ Menu</span> -->
+            <button id="menuToggle">☰</button>
             <span class="menu-text">Menu</span>
         </div>
     
         <!-- MENU LIST -->
+       
         <ul class="menu">
-            <li class="active">🏠 Dashboard</li>
-            <li>📊 Records</li>
-            <li>🎯 Budget Goal</li>
-            <li>💰 Saving Goal</li>
-            <li>📈 Reports</li>
-            <li>💡 Financial Tips</li>
-            <li>📁 Category</li>
-            <li>🆘 Support</li>
-            <li>👤 About Us</li>
-            <li>⚙️ Setting</li>
-        </ul>
+            <li class="active">
+                <span class="icon">🏠</span>
+                <span class="text">Dashboard</span>
+            </li>
     
-        <div class="logout">🚪 Log Out</div>
-        ```
+            <li>
+                <span class="icon">📊</span>
+                <span class="text">Records</span>
+            </li>
+        
+            <li>
+                <span class="icon">🎯</span>
+                <span class="text">Budget Goal</span>
+            </li>
+        
+            <li>
+                <span class="icon">💰</span>
+                <span class="text">Saving Goal</span>
+            </li>
+        
+            <li>
+                <span class="icon">📈</span>
+                <span class="text"><a href="">Reports</a></span>
+            </li>
+        
+            <li>
+                <span class="icon">💡</span>
+                <span class="text">Financial Tips</span>
+            </li>
+        
+            <li>
+                <span class="icon">📁</span>
+                <span class="text">Category</span>
+            </li>
+        
+            <li>
+                <span class="icon">🆘</span>
+                <span class="text"><a href="/support">Support</a></span>
+            </li>
+        
+            <li>
+                <span class="icon">👤</span>
+                <span class="text"><a href="/about">About Us</a></span>
+            </li>
+        
+            <li>
+                <span class="icon">⚙️</span>
+                <span class="text">Setting</span>
+            </li>
+            
+            <li>
+                <span class="icon">🚪</span>
+                <span class="text">Log out</span>
+            </li>
+        
+        </ul>
+            
+        <!-- <div class="logout">
+            <span cass="icon">🚪</span>
+            <span class="text">Log Out</span>
+        </div> -->
+    </div>
+
+<!-- <script>
+const toggle= document.getElementById("menuToggle");
+const sidebar= document.querySelector(".sidebar");
+
+toggle.addEventListener("click",function(){
+    sidebar.classList.toggle("collapsed");
+});
+</script> -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const toggle = document.getElementById("menuToggle");
+        const sidebar = document.querySelector(".sidebar");
+
+        toggle.addEventListener("click", function () {
+            sidebar.classList.toggle("collapsed");
+        });
+
+    });
+</script>
 </body>
 </html>

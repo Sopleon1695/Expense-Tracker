@@ -1,87 +1,77 @@
-/* RESET */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
+*{
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-body {
-    background: #f5f6fa;
-}
-
-/* LAYOUT */
-.layout {
-    display: flex;
-}
-
-/* SIDEBAR */
+/* Sidebar container */
 .sidebar {
-    width: 220px;
+    width: 230px;
     height: 100vh;
-    background: #ffffff;
-    padding: 20px;
-    border-right: 1px solid #eee;
-
-    display: flex;
-    flex-direction: column;
+    background: #f0f0f0;
+    padding: 0;
+    transition: 0.3s;
+}
+/* Collapsed sidebar */
+.sidebar.collapsed {
+    width: 70px;
+}
+/* Hide text */
+.sidebar.collapsed .text,
+.sidebar.collapsed .menu-text {
+    display: none;
+}
+/* Center icons */
+.sidebar.collapsed .menu li {
+    justify-content: center;
 }
 
-.logo {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 20px;
+/* Center logout */
+.sidebar.collapsed .logout {
+    justify-content: center;
 }
-
-.menu {
-    list-style: none;
-}
-
-.menu li {
-    padding: 10px;
-    margin-bottom: 6px;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-.menu li.active {
-    background: #e4e9f7;
-}
-
-.menu li:hover {
-    background: #f0f3ff;
-}
-
-.logout {
-    margin-top: auto;
-    padding: 10px;
-    cursor: pointer;
-}
-
-/* MAIN */
-.main {
-    flex: 1;
-    padding: 20px;
-}
-
-/* Sidebar header (black bar) */
+/* Top black bar */
 .sidebar-header {
     background: black;
     color: white;
     padding: 15px;
     font-size: 18px;
+}
+
+/* REMOVE BULLETS */
+.menu {
+    list-style: none;
+    padding: 10px;
+    margin: 0;
+}
+
+/* Menu items */
+.menu li,.logout{
+    padding:10px 12px;
+    margin-bottom: 6px;
+    border-radius: 6px;
+    cursor: pointer;
+
     display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: -20px -20px 20px -20px;
-    /* stretch full width */
+    text-align: center;
+    gap: 12px;
+}
+.icon {
+width: 22px;
+text-align: center;
+}
+.text {
+    font-size: 15px;
+}
+/* Active item */
+
+
+
+/* Hover effect */
+.menu li:hover {
+    background: #e8e8e8;
 }
 
-.menu-icon {
-    font-size: 20px;
-}
-
-.menu-text {
-    font-weight: bold;
+/* Logout */
+.logout {
+    padding: 15px;
+    margin-top: 20px;
 }
